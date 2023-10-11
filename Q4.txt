@@ -1,0 +1,29 @@
+// Q4) Given an array of non-negative integers nums, arrange them such that they form the largest number and return it. 
+// Note return the result in the form of string 
+// Example 1: 
+// Input: nums = [10,2] 
+// Output: "210" 
+// Example 2: 
+// Input: nums = [3,30,34,5,9] 
+// Output: "9534330" 
+
+function singleLarge(arr){
+    for (let i=0;i<arr.length;i++){
+        arr[i]= arr[i].toString();
+    }
+    arr.sort((a,b)=>{
+        let list1 = a+b;
+        let list2 = b+a;
+        if(list1 > list2){
+            return -1;
+        }
+        if(list1 < list2){
+            return 1;
+        }
+        return 0;
+    })
+    return arr.join("")
+}
+
+let res4 = singleLarge([10,2]);
+console.log("typeof the result"+" is "+(typeof(res4))+" and the result is "+(res4))

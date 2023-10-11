@@ -1,0 +1,20 @@
+// Q5) Given a array of non-negative integers nums, Find the Kth largest element in the array Note - Do not use any sorting algorithm or library's sort method 
+// Example-1: 
+// Input: nums = [10,4,12,9,87,34], K = 2 
+// Output: 34
+
+ function largestNum(nums,k){
+     for(let i =0;i<k;i++){
+         let max = i;
+         for(let j=i;j<nums.length;j++){
+             if(nums[j]>nums[max]){
+                 max=j
+             }
+         }
+         [nums[i],nums[max]] = [nums[max],nums[i]];
+     }
+     return nums[k-1]
+ }
+ 
+ let res5 = largestNum([10,4,12,9,87,34],2)
+ console.log(res5);

@@ -1,0 +1,64 @@
+// Q1) Write a function that takes an integer 'x'(greater than 0) as input and returns a new integer formed by reversing the digits of 'x' without using any built-in methods for reversal. After reversing the digits, determine whether the resulting number has any prime factors. If it does have prime factors, return 'Yes' along with the list of prime factors; otherwise, return 'No'." 
+// Example 1: 
+// Input - 123 
+// reversed integer - 321 
+// prime factors of 321 are 3 and 107 
+// output - Yes - [3,107] 
+// Example 2: 
+// Input - 1500 
+// reversed Integre - 51 
+// prime factors of 51 are 3 and 17 
+// output - Yes - [3, 17] 
+// Example 3: 
+// Input - 1000 
+// reversed Integre - 1 
+// There are no prime factors for 1 
+// output - No 
+
+function numReverse(n){
+    let reverse = 0;
+    let real = n;
+    while(n>0){
+    reverse = reverse*10+(n%10);
+    n = Math.floor(n/10);
+    }
+    return [real,reverse];
+}
+function prime(n){
+    if(n<=1) {
+        return false;
+    }
+    if(n<=3) {
+        return true;
+    }
+    if(n%2 === 0 || n%3 === 0) {
+        return false;
+    }
+    for (let i=5;i*i <= n; i+=6){
+        if(n%i === 0 || n%(i+2) === 0 ){
+            return false
+        }
+    }
+    
+    return true
+}
+
+function primeFactor(num){
+    let [real,reverse] = numReverse(num);
+    const primeno = [];
+    for(let i=2;i<=reverse;i++){
+        while(reverse%i ===0 && prime(i)){
+            primeno.push(i);
+            reverse=reverse/i;
+        }
+    }
+    
+    if (primeno.length >0){
+        return "yes"+" - "+primeno;
+    }else{
+        return "no"
+    }
+}
+
+let res = primeFactor(1500);
+console.log(res);
